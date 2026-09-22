@@ -60,6 +60,8 @@ npm run dev
 | 更新日志查看 | 不需要 | 页面内的静态记录 |
 | IMEI / SN 设备信息查询 | 需要 | 后端必须配置有效的 Xiaomi UserId 与 PassToken，且账号拥有上游接口权限 |
 
+如果不想为本项目配置账号，可自行使用小米官方的[产品验证页面](https://www.mi.com/global/verify/#/en/tab/imei)，输入 IMEI 或 SN 查询。该网页要求填写图形验证码；有兴趣可以自行分析页面交互，但需按网页要求完成验证。此途径独立于本项目，返回信息可能与本项目的设备查询结果不同。
+
 仓库中的 `appsettings.json` 不包含真实账户凭据。仅在需要设备信息查询时，通过环境变量设置账号；PowerShell 示例：
 
 ```powershell
@@ -137,6 +139,8 @@ Only the **backend** needs Xiaomi credentials; visitors do not sign in on the fr
 | Query and filter Fastboot / Recovery ROMs and view download links | No | Uses the upstream ROM service |
 | View the changelog | No | Static page content |
 | Look up a device by IMEI or SN | Yes | Requires a valid Xiaomi UserId and PassToken with upstream API access |
+
+If you prefer not to configure an account for this project, use Xiaomi's official [Product Authentication page](https://www.mi.com/global/verify/#/en/tab/imei) to look up an IMEI or serial number manually. The page requires an image verification code. You may inspect how the page works, but complete its verification as required. This is separate from this project's device lookup, and the returned details may differ.
 
 Set credentials through environment variables before starting the backend only if device lookup is needed:
 
