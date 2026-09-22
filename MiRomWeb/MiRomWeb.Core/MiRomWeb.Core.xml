@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MiRomWeb.Core</name>
+    </assembly>
+    <members>
+        <member name="M:MiRomWeb.Core.Helper.MaskHelper.MaskString(System.String,System.Int32,System.Int32,System.Char)">
+            <summary>
+            对字符串进行掩码（中间替换为掩码字符）
+            </summary>
+            <param name="input">输入字符串</param>
+            <param name="visibleStart">开头可见字符数</param>
+            <param name="visibleEnd">结尾可见字符数</param>
+            <param name="maskChar">掩码字符，默认为 '*'</param>
+            <returns>掩码后的字符串</returns>
+        </member>
+    </members>
+</doc>

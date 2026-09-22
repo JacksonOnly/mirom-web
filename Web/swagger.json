@@ -1,0 +1,390 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "规范化接口演示",
+    "description": "让 .NET 开发更简单，更通用，更流行。",
+    "termsOfService": "https://furion.net",
+    "contact": {
+      "name": "百小僧",
+      "url": "https://gitee.com/monksoul",
+      "email": "monksoul@outlook.com"
+    },
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://gitee.com/dotnetchina/Furion/blob/rc1/LICENSE"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/system/products": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "operationId": "api-system-products-Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_Dictionary_StringString"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_Dictionary_StringString"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_Dictionary_StringString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/system/full-rom/{product}": {
+      "post": {
+        "tags": [
+          "system"
+        ],
+        "operationId": "api-system-full-rom-product-Post",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_FullRomData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_FullRomData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_FullRomData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/system/phone-info": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "operationId": "api-system-phone-info-Get",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "<br />&nbsp; Token = 0<br />&nbsp; CPUID = 1<br />&nbsp; IMEI = 2<br />&nbsp; SN = 3<br />",
+            "schema": {
+              "$ref": "#/components/schemas/KeywordType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_PhoneInfo"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_PhoneInfo"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RESTfulResult_PhoneInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FullRomData": {
+        "type": "object",
+        "properties": {
+          "fastboot": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RomEntry"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KeywordType": {
+        "enum": [
+          "Token",
+          "CPUID",
+          "IMEI",
+          "SN"
+        ],
+        "type": "string",
+        "description": "<br />&nbsp; Token = 0<br />&nbsp; CPUID = 1<br />&nbsp; IMEI = 2<br />&nbsp; SN = 3<br />"
+      },
+      "PhoneInfo": {
+        "type": "object",
+        "properties": {
+          "imeI1": {
+            "type": "string",
+            "nullable": true
+          },
+          "imeI2": {
+            "type": "string",
+            "nullable": true
+          },
+          "sn": {
+            "type": "string",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "repairEndTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "activationTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "findMyDeviceStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "goodsPicture": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RESTfulResult_Dictionary_StringString": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "succeeded": {
+            "type": "boolean"
+          },
+          "errors": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "extras": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RESTfulResult_FullRomData": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/FullRomData"
+          },
+          "succeeded": {
+            "type": "boolean"
+          },
+          "errors": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "extras": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RESTfulResult_PhoneInfo": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/PhoneInfo"
+          },
+          "succeeded": {
+            "type": "boolean"
+          },
+          "errors": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "extras": {
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RomEntry": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "romID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ver": {
+            "type": "string",
+            "nullable": true
+          },
+          "osVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "device": {
+            "type": "string",
+            "nullable": true
+          },
+          "codebase": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "md5": {
+            "type": "string",
+            "nullable": true
+          },
+          "sha1": {
+            "type": "string",
+            "nullable": true
+          },
+          "bigVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "osBigVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "pubLevel": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadVer": {
+            "type": "string",
+            "nullable": true
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "downloadUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "system",
+      "description": "系统服务接口"
+    }
+  ]
+}

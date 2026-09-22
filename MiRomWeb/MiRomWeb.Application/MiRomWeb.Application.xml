@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MiRomWeb.Application</name>
+    </assembly>
+    <members>
+        <member name="T:MiRomWeb.Application.System.Configuration.XiaomiAccountConfig">
+            <summary>
+            账户配置项
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAccountConfig.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAccountConfig.PassToken">
+            <summary>
+            PassToken
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAccountConfig.DisplayName">
+            <summary>
+            账户显示名称（可选）
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions">
+            <summary>
+            小米认证配置选项
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions.UserId">
+            <summary>
+            用户ID（兼容旧配置）
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions.PassToken">
+            <summary>
+            PassToken（兼容旧配置）
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions.Accounts">
+            <summary>
+            账户列表（支持多个账户）
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions.Sid">
+            <summary>
+            Service ID，默认为 eshopmobile
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Configuration.XiaomiAuthOptions.AutoInitializeOnStartup">
+            <summary>
+            是否在启动时自动初始化
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Services.AccountInfo">
+            <summary>
+            账户信息
+            </summary>
+        </member>
+        <member name="P:MiRomWeb.Application.System.Services.AccountInfo.RateLimitedUntil">
+            <summary>
+            账户被限流的时间戳（操作太频繁时设置）
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Services.ServiceTokenInfo">
+            <summary>
+            ServiceToken信息
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Services.MiServiceManager">
+            <summary>
+            小米服务管理器，用于获取和管理ServiceToken（支持多账户和多sid）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.AddOrUpdateAccount(System.String,System.String,System.String,System.String)">
+            <summary>
+            添加或更新账户
+            </summary>
+            <param name="accountId">账户ID（唯一标识，建议使用userId或自定义名称）</param>
+            <param name="userId">用户ID</param>
+            <param name="passToken">PassToken</param>
+            <param name="displayName">显示名称（可选）</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.RemoveAccount(System.String)">
+            <summary>
+            删除账户
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.SwitchAccount(System.String)">
+            <summary>
+            切换当前账户
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAllAccountIds">
+            <summary>
+            获取所有账户ID（包括被限流的账户）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAvailableAccountIds">
+            <summary>
+            获取可用的账户ID（排除被限流且在24小时内的账户）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAccountInfo(System.String)">
+            <summary>
+            获取账户信息
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetCurrentAccountId">
+            <summary>
+            获取当前账户ID
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.SetDefaultSid(System.String)">
+            <summary>
+            设置默认SID
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetDefaultSid">
+            <summary>
+            获取默认SID
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.ClearExpiredRateLimits">
+            <summary>
+            清理所有过期的限流标记
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetServiceTokenCookieAsync(System.String,System.String)">
+            <summary>
+            获取ServiceToken的Cookie字符串值（懒加载）
+            </summary>
+            <param name="accountId">账户ID，如果为null则使用当前账户</param>
+            <param name="sid">SID，如果为null则使用默认SID</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetServiceTokenAsync(System.String,System.String)">
+            <summary>
+            获取ServiceToken的CookieJar（懒加载）
+            </summary>
+            <param name="accountId">账户ID，如果为null则使用当前账户</param>
+            <param name="sid">SID，如果为null则使用默认SID</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAesKeyAsync(System.String,System.String)">
+            <summary>
+            获取AesKey（Ssecurity）- 异步版本，如果不存在则自动获取
+            </summary>
+            <param name="accountId">账户ID，如果为null则使用当前账户</param>
+            <param name="sid">SID，如果为null则使用默认SID</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAesKey(System.String,System.String)">
+            <summary>
+            获取AesKey（Ssecurity）- 同步版本，如果不存在则返回null
+            </summary>
+            <param name="accountId">账户ID，如果为null则使用当前账户</param>
+            <param name="sid">SID，如果为null则使用默认SID</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.FindAvailableTokenBySid(System.String)">
+            <summary>
+            通过SID查找已有可用的ServiceToken Cookie
+            </summary>
+            <param name="sid">SID</param>
+            <returns>返回找到的账户ID和Cookie值，如果没有找到则返回null</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.FindAccountIdByUserId(System.String)">
+            <summary>
+            通过UserId查找账户ID
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns>账户ID，如果未找到则返回null</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAccountInfoByUserId(System.String,System.String)">
+            <summary>
+            获取指定UserId的账户信息和Token信息
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="sid">SID，如果为null则使用默认SID</param>
+            <returns>账户信息和Token信息，如果未找到则返回null</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.MarkAccountAsRateLimited(System.String,System.Int32)">
+            <summary>
+            标记账户为操作太频繁（限流24小时）
+            </summary>
+            <param name="accountId">账户ID</param>
+            <param name="hours">限流时长（小时），默认24小时</param>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.IsAccountRateLimited(System.String)">
+            <summary>
+            检查账户是否被限流
+            </summary>
+            <param name="accountId">账户ID</param>
+            <returns>如果账户被限流且在限流期内返回true，否则返回false</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.MarkAccountAsInvalid(System.String,System.String)">
+            <summary>
+            标记账户为无效并删除
+            </summary>
+            <param name="accountId">账户ID</param>
+            <param name="reason">原因</param>
+            <returns>是否成功删除</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.ClearServiceToken(System.String,System.String)">
+            <summary>
+            清除指定账户和SID的ServiceToken（强制刷新）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.ClearAccountTokens(System.String)">
+            <summary>
+            清除指定账户的所有ServiceToken
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.ClearAllTokens">
+            <summary>
+            清除所有ServiceToken
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetTokenKey(System.String,System.String)">
+            <summary>
+            生成Token的Key（accountId:sid）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.RemoveAccountTokens(System.String)">
+            <summary>
+            移除账户的所有Token
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAuthTokenAsync(System.String,System.String,System.String)">
+            <summary>
+            获取AuthToken，如果location为空则通过userId和passToken获取
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.ExtractServiceTokenFromCookie(System.String,MiRomWeb.Application.System.Services.ServiceTokenInfo)">
+            <summary>
+            从Cookie字符串中提取serviceToken值
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetServiceTokenCookie">
+            <summary>
+            获取ServiceToken的Cookie字符串值（兼容旧API，使用当前账户和默认SID）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetServiceToken">
+            <summary>
+            获取ServiceToken（兼容旧API，使用当前账户和默认SID）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.SetSid(System.String)">
+            <summary>
+            设置SID（兼容旧API，设置默认SID）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.SetUserId(System.String)">
+            <summary>
+            设置用户ID（兼容旧API，添加到账户管理）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.SetPassToken(System.String)">
+            <summary>
+            设置PassToken（兼容旧API，更新当前账户）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAuthToken(System.String)">
+            <summary>
+            获取AuthToken（兼容旧API）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetAesKey">
+            <summary>
+            获取AesKey（兼容旧API）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetUserId">
+            <summary>
+            获取用户ID（兼容旧API）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.MiServiceManager.GetPassToken">
+            <summary>
+            获取PassToken（兼容旧API）
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Services.TokenExpiredException">
+            <summary>
+            Token过期异常
+            </summary>
+        </member>
+        <member name="T:MiRomWeb.Application.System.Services.XiaomiAuthInitializer">
+            <summary>
+            小米认证初始化服务
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.XiaomiAuthInitializer.Initialize">
+            <summary>
+            初始化认证信息（仅添加账户，不预加载Token）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.System.Services.XiaomiAuthInitializer.InitializeAsync">
+            <summary>
+            异步初始化认证信息（仅添加账户，不预加载Token）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.ISystemService.InitializeServiceManager(System.String,System.String,System.String)">
+            <summary>
+            初始化ServiceToken管理器（设置userId和passToken）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.ISystemService.PreloadServiceTokenAsync">
+            <summary>
+            预加载ServiceToken（在启动时调用）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetPhoneInfo(System.String)">
+            <summary>
+            获取手机信息（自动判断IMEI或SN）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.InitializeServiceManager(System.String,System.String,System.String)">
+            <summary>
+            初始化ServiceToken管理器（设置userId和passToken）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.PreloadServiceTokenAsync">
+            <summary>
+            预加载ServiceToken（在启动时调用）- 已弃用，Token现在按需加载
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.EnsureServiceTokenAsync(System.String,System.String)">
+            <summary>
+            确保有可用的ServiceToken Cookie字符串（支持自动切换账户）
+            </summary>
+            <param name="sid">指定的SID，如果为null则使用默认SID</param>
+            <param name="userId">指定的UserId，如果为null则尝试所有账户</param>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.RefreshServiceTokenAsync(System.String)">
+            <summary>
+            刷新ServiceToken（支持自动切换账户）
+            </summary>
+            <param name="sid">指定的SID</param>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.CheckTokenExpired(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            检查响应是否包含过期错误
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.CheckResponseError(Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            检查响应错误（合并Token过期和限流检查）
+            </summary>
+            <returns>如果是限流错误返回true，如果是Token过期抛出异常，否则返回false</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetInsuranceInfoAsync(System.String,System.String,MiRomWeb.Application.System.Dtos.PhoneInfo)">
+            <summary>
+            查询三包和SN信息（支持自动切换账户重试）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetDeviceInfoAsync(System.String,System.String,System.String,MiRomWeb.Application.System.Dtos.PhoneInfo)">
+            <summary>
+            查询机型信息（支持自动切换账户重试）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetActivationInfoAsync(System.String,System.String,System.String,MiRomWeb.Application.System.Dtos.PhoneInfo)">
+            <summary>
+            查询激活日期
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetFindMyDeviceStatusAsync(System.String,System.String,MiRomWeb.Application.System.Dtos.PhoneInfo)">
+            <summary>
+            查询查找设备状态（FindMyDevice Status）
+            </summary>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.CheckFrePermissionAsync">
+            <summary>
+            检查FRP（Factory Reset Protection）权限示例
+            使用UnlockRequests调用解锁相关API
+            </summary>
+            <returns>是否具有FRP权限</returns>
+        </member>
+        <member name="M:MiRomWeb.Application.SystemService.GetUnlockDeviceInfoAsync(System.String,System.String)">
+            <summary>
+            获取设备解锁信息示例
+            使用UnlockRequests获取设备详细信息
+            </summary>
+            <param name="product">设备产品名称（如：alioth）</param>
+            <param name="sn">设备序列号</param>
+            <returns>设备信息JSON对象</returns>
+        </member>
+        <member name="T:MiRomWeb.Application.SystemAppService">
+            <summary>
+            系统服务接口
+            </summary>
+        </member>
+    </members>
+</doc>

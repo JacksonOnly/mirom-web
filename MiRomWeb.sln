@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiRomWeb.Application", "MiRomWeb\MiRomWeb.Application\MiRomWeb.Application.csproj", "{81FEEB1A-0B80-493B-AB52-202368C36C0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiRomWeb.Core", "MiRomWeb\MiRomWeb.Core\MiRomWeb.Core.csproj", "{77CAEC1C-1290-4C1A-BDDE-18EEC98E388E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiRomWeb.Web.Core", "MiRomWeb\MiRomWeb.Web.Core\MiRomWeb.Web.Core.csproj", "{7D5F448B-699F-42F4-8ADD-D527632FE728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiRomWeb.Web.Entry", "MiRomWeb\MiRomWeb.Web.Entry\MiRomWeb.Web.Entry.csproj", "{EA3DE568-D580-4AB0-B979-8892A6C7D96A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81FEEB1A-0B80-493B-AB52-202368C36C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FEEB1A-0B80-493B-AB52-202368C36C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81FEEB1A-0B80-493B-AB52-202368C36C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81FEEB1A-0B80-493B-AB52-202368C36C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77CAEC1C-1290-4C1A-BDDE-18EEC98E388E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CAEC1C-1290-4C1A-BDDE-18EEC98E388E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CAEC1C-1290-4C1A-BDDE-18EEC98E388E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CAEC1C-1290-4C1A-BDDE-18EEC98E388E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5F448B-699F-42F4-8ADD-D527632FE728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5F448B-699F-42F4-8ADD-D527632FE728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5F448B-699F-42F4-8ADD-D527632FE728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5F448B-699F-42F4-8ADD-D527632FE728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA3DE568-D580-4AB0-B979-8892A6C7D96A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA3DE568-D580-4AB0-B979-8892A6C7D96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA3DE568-D580-4AB0-B979-8892A6C7D96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA3DE568-D580-4AB0-B979-8892A6C7D96A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63FE047A-8B55-4698-BF5F-E761952E0744}
+	EndGlobalSection
+EndGlobal
