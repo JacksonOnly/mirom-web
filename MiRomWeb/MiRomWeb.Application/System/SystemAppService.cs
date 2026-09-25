@@ -19,6 +19,7 @@ namespace MiRomWeb.Application
         }
         public async Task<Dictionary<string,string>> GetProducts()
         {
+            // 自己决定 是 Cache还是实时请求，我建议定个定时任务每天进行 请求然后缓存。
             return await _systemService.GetProducts();
         }
         public async Task<FullRomData> PostFullRom(string product)

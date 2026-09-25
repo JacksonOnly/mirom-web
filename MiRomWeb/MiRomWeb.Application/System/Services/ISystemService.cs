@@ -6,7 +6,8 @@ namespace MiRomWeb.Application
 {
     public interface ISystemService
     {
-       Task<Dictionary<string,string>> GetProducts();
+        Task<Dictionary<string,string>> GetCacheProducts();
+        Task<Dictionary<string,string>> GetProducts();
         Task<FullRomData> GetFullRom(string product);
         Task<PhoneInfo> GetPhoneInfo(string keyword);
         Task<List<RomEntry>> GetRecoveryRom(string product);

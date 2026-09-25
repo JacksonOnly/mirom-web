@@ -672,11 +672,31 @@ namespace MiRomWeb.Application
             }
         }
 
-        public async Task<Dictionary<string, string>> GetProducts()
+        public async Task<Dictionary<string, string>> GetCacheProducts()
         {
             var path = Path.Combine(AppContext.BaseDirectory, "products.json");
             var json = await File.ReadAllTextAsync(path);
             return JSON.Deserialize<Dictionary<string, string>>(json) ?? new Dictionary<string, string>();
+        }
+
+        public async Task<Dictionary<string, string>> GetProducts()
+        {
+            var dict = new Dictionary<string, string>()
+            {
+                {"q", AESEncryption.Encrypt(miid,aesKey,Encoding.UTF8.GetBytes(aesIv),isBase64:true)},
+                {"t" ,""},
+                {"s","1" }
+            };
+
+            var responseStr = await productsUrl
+                .SetQueryParams(dict)
+                .WithHeader("User-Agent", userAgent)
+                .GetAsync()
+                .ReceiveString();
+            var baseDto = JsonConvert.DeserializeObject<OtaBaseDto<List<ProductEntry>>>(responseStr);
+            if (baseDto?.Code == 2000)
+                return baseDto?.Data?.ToDictionary(it => it.DisplayName, it => it.Product) ?? new Dictionary<string, string>();
+            throw Oops.Oh($"错误的响应代码: {baseDto?.Code}");
         }
 
         public async Task<List<RomEntry>> GetRecoveryRom(string product)
